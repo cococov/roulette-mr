@@ -1,12 +1,13 @@
 import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import * as R from 'ramda'
 
 /**
  * App Context.
  */
 const AppContext = createContext();
 
-const BASE_OPTIONS = ['Juan K', 'Mera', 'Ezequiel', 'Giovanni', 'JP'];
+const BASE_OPTIONS = ['Mera', 'Ezequiel', 'Giovanni', 'JP', 'Juan K',  'Jesús', 'Edgar', 'Paloma', 'Benjamín'];
 
 /**
  * App Provider.
@@ -17,15 +18,15 @@ export const AppProvider = ({ children }) => {
   const [selected, setSelected] = useState(0);
   const [running, setRunning] = useState(false);
   const [randomOptions, setRandomOptions] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState(BASE_OPTIONS.map(() => true));
+  const [selectedOptions, setSelectedOptions] = useState(BASE_OPTIONS.map((value, index) => index < 4));
 
   useEffect(() => {
-    setRandomOptions(BASE_OPTIONS.sort(() => 0.5 - Math.random()))
+    setRandomOptions(R.sort(() => 0.5 - Math.random(), BASE_OPTIONS))
   }, []);
 
   useEffect(() => {
-    const optionsToUse = BASE_OPTIONS.filter((value, index) => selectedOptions[index] )
-    setRandomOptions(optionsToUse.sort(() => 0.5 - Math.random()))
+    const optionsToUse = BASE_OPTIONS.filter((value, index) => selectedOptions[index])
+    setRandomOptions(R.sort(() => 0.5 - Math.random(), optionsToUse))
   }, [selectedOptions])
 
   return (
