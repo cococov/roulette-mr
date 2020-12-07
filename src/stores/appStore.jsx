@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
  */
 const AppContext = createContext();
 
+const BASE_OPTIONS = ['Juan K', 'Mera', 'Ezequiel', 'Giovanni', 'JP'];
+
 /**
  * App Provider.
  * @param {Object} props
@@ -15,20 +17,28 @@ export const AppProvider = ({ children }) => {
   const [selected, setSelected] = useState(0);
   const [running, setRunning] = useState(false);
   const [randomOptions, setRandomOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState(BASE_OPTIONS.map(() => true));
 
   useEffect(() => {
-    const options = ['Juan K', 'Mera', 'Ezequiel', 'Giovanni', 'JP'];
-    setRandomOptions(options.sort(() => 0.5 - Math.random()))
+    setRandomOptions(BASE_OPTIONS.sort(() => 0.5 - Math.random()))
   }, []);
+
+  useEffect(() => {
+    const optionsToUse = BASE_OPTIONS.filter((value, index) => selectedOptions[index] )
+    setRandomOptions(optionsToUse.sort(() => 0.5 - Math.random()))
+  }, [selectedOptions])
 
   return (
     <AppContext.Provider
       value={{
+        BASE_OPTIONS,
         selected,
         running,
         randomOptions,
+        selectedOptions,
         setSelected,
         setRunning,
+        setSelectedOptions,
       }}
     >
       {children}

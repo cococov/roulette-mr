@@ -5,14 +5,15 @@ body {
     sans-serif;
   -webkit-font-smoothing : antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #eeeeee;
+  background-color       : #282c34;
+  min-height             : 100vh;
+  display                : flex;
+  flex-direction         : column;
+  align-items            : stretch;
+  justify-content        : center;
+  font-size              : calc(10px + 2vmin);
+  color                  : #eeeeee;
+  overflow-x             : hidden;
 }
 
 code {

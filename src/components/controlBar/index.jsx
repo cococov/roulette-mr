@@ -21,7 +21,7 @@ const StyledForm = styled.span`
 `
 const StyledTextField = styled(TextField)`
   & {
-    width: 20rem;
+    width: 22rem;
     margin: 0.5rem!important
   }
 `;
