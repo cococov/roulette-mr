@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import * as R from 'ramda'
 
@@ -7,7 +7,7 @@ import * as R from 'ramda'
  */
 const AppContext = createContext();
 
-const BASE_OPTIONS = ['Mera', 'Ezequiel', 'Giovanni', 'JP', 'Juan K',  'Jesús', 'Edgar', 'Paloma', 'Benjamín'];
+const BASE_OPTIONS = ['Mera', 'Ezequiel', 'Giovanni', 'JP', 'Juan K', 'Jesús', 'Edgar', 'Paloma', 'Benjamín'];
 
 /**
  * App Provider.
@@ -20,14 +20,23 @@ export const AppProvider = ({ children }) => {
   const [randomOptions, setRandomOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState(BASE_OPTIONS.map((value, index) => index < 4));
 
-  useEffect(() => {
-    setRandomOptions(R.sort(() => 0.5 - Math.random(), BASE_OPTIONS))
-  }, []);
-
-  useEffect(() => {
+  const randomizeOptions = useCallback(() => {
     const optionsToUse = BASE_OPTIONS.filter((value, index) => selectedOptions[index])
     setRandomOptions(R.sort(() => 0.5 - Math.random(), optionsToUse))
-  }, [selectedOptions])
+  }, [selectedOptions]);
+
+  useEffect(() => {
+    randomizeOptions();
+  }, [randomizeOptions]);
+
+  useEffect(() => {
+    randomizeOptions();
+  }, [randomizeOptions, selectedOptions])
+
+  useEffect(() => {
+    if (running)
+      randomizeOptions();
+  }, [randomizeOptions, running])
 
   return (
     <AppContext.Provider

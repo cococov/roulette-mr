@@ -28,7 +28,7 @@ const Roulette = () => {
     []
   );
 
-  const random = (min, max) => Math.floor((Math.random() * max) + min);
+  const random = (min, max) => Math.floor((Math.random() * (max - min + 1)) + min);
 
   useEffect(() => {
     if (running && !runningRef.current) {
