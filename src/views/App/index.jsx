@@ -19,7 +19,9 @@ const RouletteContainer = styled.span`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 3rem;
+  @media (max-width: 540px) {
+    margin-top: 3rem;
+  }
   `
 
 const OptionsContainer = styled.span`
@@ -27,7 +29,9 @@ const OptionsContainer = styled.span`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
+  @media (max-width: 540px) {
+    margin-top: 5rem;
+  }
 `
 
 const App = () => {
