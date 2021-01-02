@@ -1,13 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import { StyledMainName } from './style';
 
-const StyledName = styled.span`
-  font-size:  ${({ robin }) => robin ? '2.5rem' : '5rem' };
-  font-weight: 700;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-`
-
-const Main = ({ value, robin }) => <StyledName robin={robin} >{value}</StyledName>;
+const Main = ({ value, robin }) => <StyledMainName robin={robin} >{value}</StyledMainName>;
 
 export default Main;

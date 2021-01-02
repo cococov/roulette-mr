@@ -1,18 +1,8 @@
 import React, { useEffect, useRef, useContext } from 'react';
-import styled from 'styled-components';
 import { AppContext } from '../../stores';
-import Top from './top';
+import { StyledContainer } from './style';
+import Secondary from './secondary';
 import Main from './main';
-import Bottom from './bottom';
-
-const StyledContainer = styled.span`
-  display: flex;
-  flex-direction: column;
-  width: ${({ robin }) => robin ? '12.5rem' : '25rem' };
-  align-items: center;
-  justify-content: center;
-  position: relative;
-`
 
 // Obtiene la siguiente posición de una array circularmente.
 const getNext = (selected, length) => (selected + 1) === length ? 0 : (selected + 1);
@@ -50,9 +40,9 @@ const Roulette = () => {
 
   return (
     <StyledContainer>
-      <Top value={prev(selected, randomOptions.length)} />
+      <Secondary value={prev(selected, randomOptions.length)} />
       <Main value={main(selected)} />
-      <Bottom value={next(selected, randomOptions.length)} />
+      <Secondary value={next(selected, randomOptions.length)} />
     </StyledContainer>
   );
 };
@@ -85,9 +75,9 @@ export const RobinRoulette = () => {
 
   return (
     <StyledContainer robin>
-      <Top value={prev(selectedRobin, randomRobinOptions.length)} robin />
+      <Secondary value={prev(selectedRobin, randomRobinOptions.length)} robin />
       <Main value={main(selectedRobin)} robin />
-      <Bottom value={next(selectedRobin, randomRobinOptions.length)} robin />
+      <Secondary value={next(selectedRobin, randomRobinOptions.length)} robin />
     </StyledContainer>
   );
 };

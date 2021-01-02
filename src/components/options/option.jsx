@@ -1,21 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Checkbox } from '@material-ui/core';
-
-const StyledContainer = styled.span`
-  display: flex;
-  flex-direction: row;
-  max-width: fit-content;
-  align-items: flex-start;
-  justify-content: center;
-`
-const StyledName = styled.span`
-  font-size: 2rem;
-`
+import { StyledContainerRow, StyledName } from './style';
 
 const Options = ({ name, index, selected, running, color, handleCheck }) => {
   return (
-    <StyledContainer>
+    <StyledContainerRow>
       <Checkbox
         checked={selected}
         disabled={running}
@@ -23,7 +12,7 @@ const Options = ({ name, index, selected, running, color, handleCheck }) => {
         onChange={() => { handleCheck(index) }}
       />
       <StyledName>{name}</StyledName>
-    </StyledContainer>
+    </StyledContainerRow>
   );
 };
 

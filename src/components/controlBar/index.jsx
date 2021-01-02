@@ -1,34 +1,7 @@
 import React, { useContext } from 'react';
-//import { TextField } from '@material-ui/core';
-import styled from 'styled-components';
 import { AppContext } from '../../stores';
 import Button from '../button';
-
-const StyledContainer = styled.span`
-  display: flex;
-  flex-direction: column;
-  width: 25rem;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 2rem;
-`
-/* const StyledForm = styled.span`
-  display: flex;
-  flex-direction: column;
-  max-width: fit-content;
-  align-items: center;
-  justify-content: center;
-`
-const StyledTextField = styled(TextField)`
-  & {
-    width: 22rem;
-    margin: 0.5rem!important
-  }
-`; */
-
-const ButtonContainer = styled.span`
-  margin-bottom: 1rem;
-`;
+import {StyledContainer, ButtonContainer} from './style';
 
 const Roulette = () => {
   const { setRunning } = useContext(AppContext);

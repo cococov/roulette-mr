@@ -1,15 +1,7 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
 import { AppContext } from '../../stores';
 import Option from './option';
-
-const StyledContainer = styled.span`
-  display: flex;
-  flex-direction: column;
-  max-width: fit-content;
-  align-items: flex-start;
-  justify-content: center;
-`
+import { StyledContainerColumn } from './style';
 
 const Options = () => {
   const { running, BASE_OPTIONS, selectedOptions, setSelectedOptions } = useContext(AppContext);
@@ -21,7 +13,7 @@ const Options = () => {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainerColumn>
       {BASE_OPTIONS.map(
         (option, index) => (
           <Option
@@ -35,7 +27,7 @@ const Options = () => {
             {option}
           </Option>
         ))}
-    </StyledContainer>
+    </StyledContainerColumn>
   );
 };
 
@@ -49,7 +41,7 @@ export const RobinOptions = () => {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainerColumn>
       {BASE_ROBIN_OPTIONS.map(
         (option, index) => (
           <Option
@@ -63,7 +55,7 @@ export const RobinOptions = () => {
             {option}
           </Option>
         ))}
-    </StyledContainer>
+    </StyledContainerColumn>
   );
 };
 
