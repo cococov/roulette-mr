@@ -20,3 +20,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.MuiCheckbox-colorPrimary {
+  color:#f44336!important
+}
+
+.MuiCheckbox-colorSecondary {
+  color:#2196f3!important
+}

@@ -13,12 +13,13 @@ const StyledName = styled.span`
   font-size: 2rem;
 `
 
-const Options = ({ name, index, selected, running, handleCheck }) => {
+const Options = ({ name, index, selected, running, color, handleCheck }) => {
   return (
     <StyledContainer>
       <Checkbox
         checked={selected}
         disabled={running}
+        color={color}
         onChange={() => { handleCheck(index) }}
       />
       <StyledName>{name}</StyledName>

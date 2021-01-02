@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { TextField } from '@material-ui/core';
+//import { TextField } from '@material-ui/core';
 import styled from 'styled-components';
 import { AppContext } from '../../stores';
 import Button from '../button';
@@ -7,12 +7,12 @@ import Button from '../button';
 const StyledContainer = styled.span`
   display: flex;
   flex-direction: column;
-  max-width: fit-content;
+  width: 25rem;
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
 `
-const StyledForm = styled.span`
+/* const StyledForm = styled.span`
   display: flex;
   flex-direction: column;
   max-width: fit-content;
@@ -24,7 +24,7 @@ const StyledTextField = styled(TextField)`
     width: 22rem;
     margin: 0.5rem!important
   }
-`;
+`; */
 
 const ButtonContainer = styled.span`
   margin-bottom: 1rem;
@@ -38,11 +38,11 @@ const Roulette = () => {
       <ButtonContainer>
         <Button onClick={() => { setRunning(true) }}>START</Button>
       </ButtonContainer>
-      <StyledForm>
+      {/*<StyledForm>
         <StyledTextField label="Name" variant="outlined" />
         <StyledTextField label="MR Label" variant="outlined" />
         <StyledTextField label="MR Link" variant="outlined" />
-      </StyledForm>
+      </StyledForm>*/}
     </StyledContainer>
   );
 };
