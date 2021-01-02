@@ -17,6 +17,7 @@ const BASE_ROBIN_OPTIONS = ['Jesús', 'Edgar', 'Paloma', 'Benjamín'];
  */
 export const AppProvider = ({ children }) => {
   const [running, setRunning] = useState(false);
+  const [isRobinChecked, setRobinChecked] = useState(false);
 
   const [selected, setSelected] = useState(0);
   const [randomOptions, setRandomOptions] = useState([]);
@@ -74,11 +75,13 @@ export const AppProvider = ({ children }) => {
         randomRobinOptions,
         selectedOptions,
         selectedRobinOptions,
+        isRobinChecked,
         setSelected,
         setSelectedRobin,
         setRunning,
         setSelectedOptions,
         setSelectedRobinOptions,
+        setRobinChecked,
       }}
     >
       {children}

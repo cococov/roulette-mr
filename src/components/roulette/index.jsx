@@ -51,7 +51,7 @@ const Roulette = () => {
  * Ruleta para seleccionar Robin.
  */
 export const RobinRoulette = () => {
-  const { selectedRobin, running, randomRobinOptions, setSelectedRobin } = useContext(AppContext);
+  const { selectedRobin, running, randomRobinOptions, isRobinChecked, setSelectedRobin } = useContext(AppContext);
   const runningRef = useRef(false);
   const intervalRef = useRef(null);
 
@@ -74,11 +74,15 @@ export const RobinRoulette = () => {
   const next = (selected, length) => randomRobinOptions[getNext(selected, length)];
 
   return (
-    <StyledContainer robin>
-      <Secondary value={prev(selectedRobin, randomRobinOptions.length)} robin />
-      <Main value={main(selectedRobin)} robin />
-      <Secondary value={next(selectedRobin, randomRobinOptions.length)} robin />
-    </StyledContainer>
+    <>
+      {isRobinChecked ? (
+          <StyledContainer robin>
+            <Secondary value={prev(selectedRobin, randomRobinOptions.length)} robin />
+            <Main value={main(selectedRobin)} robin />
+            <Secondary value={next(selectedRobin, randomRobinOptions.length)} robin />
+          </StyledContainer>) : <></>
+      }
+    </>
   );
 };
 

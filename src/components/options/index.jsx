@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../stores';
-import Option from './option';
-import { StyledContainerColumn } from './style';
+import Option from '../checkbox';
+import { StyledContainer } from './style';
 
 const Options = () => {
   const { running, BASE_OPTIONS, selectedOptions, setSelectedOptions } = useContext(AppContext);
@@ -13,26 +13,28 @@ const Options = () => {
   };
 
   return (
-    <StyledContainerColumn>
+    <StyledContainer>
       {BASE_OPTIONS.map(
         (option, index) => (
           <Option
+            key={option}
             name={option}
             index={index}
             running={running}
-            color="primary"
-            selected={selectedOptions[index]}
+            color={running ? 'default' : 'primary'}
+            size={2}
+            selected={!!selectedOptions[index]}
             handleCheck={handleCheck}
           >
             {option}
           </Option>
         ))}
-    </StyledContainerColumn>
+    </StyledContainer>
   );
 };
 
 export const RobinOptions = () => {
-  const { running, BASE_ROBIN_OPTIONS, selectedRobinOptions, setSelectedRobinOptions } = useContext(AppContext);
+  const { running, BASE_ROBIN_OPTIONS, isRobinChecked, selectedRobinOptions, setSelectedRobinOptions } = useContext(AppContext);
 
   const handleCheck = index => {
     setSelectedRobinOptions((prev) => (
@@ -41,21 +43,27 @@ export const RobinOptions = () => {
   };
 
   return (
-    <StyledContainerColumn>
-      {BASE_ROBIN_OPTIONS.map(
-        (option, index) => (
-          <Option
-            name={option}
-            index={index}
-            running={running}
-            color="secondary"
-            selected={selectedRobinOptions[index]}
-            handleCheck={handleCheck}
-          >
-            {option}
-          </Option>
-        ))}
-    </StyledContainerColumn>
+    <>
+      {isRobinChecked ? (
+        <StyledContainer>
+          {BASE_ROBIN_OPTIONS.map(
+            (option, index) => (
+              <Option
+                key={option}
+                name={option}
+                index={index}
+                running={running}
+                color={running ? 'default' : 'secondary'}
+                size={2}
+                selected={!!selectedRobinOptions[index]}
+                handleCheck={handleCheck}
+              >
+                {option}
+              </Option>
+            ))}
+        </StyledContainer>) : <></>
+      }
+    </>
   );
 };
 

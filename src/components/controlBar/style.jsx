@@ -24,5 +24,13 @@ export const StyledTextField = styled(TextField)`
 `;
 
 export const ButtonContainer = styled.span`
+  display: flex;
+  flex-direction: row;
   margin-bottom: 1rem;
+`;
+
+export const RobinCheckContainer = styled.span`
+  & {
+    margin-left: 1rem;
+  }
 `;
