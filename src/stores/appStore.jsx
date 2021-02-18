@@ -7,8 +7,8 @@ import * as R from 'ramda'
  */
 const AppContext = createContext();
 
-const BASE_OPTIONS = ['Mera', 'Giovanni', 'JP', 'Juan K', 'Jesús'];
-const BASE_ROBIN_OPTIONS = ['Edgar', 'Paloma', 'Benjamín', 'Guido', 'Vicente'];
+const BASE_OPTIONS = ['Mera', 'Giovanni', 'JP', 'Juan K', 'Jesús', 'Edgar'];
+const BASE_ROBIN_OPTIONS = ['Paloma', 'Benjamín', 'Guido', 'Vicente', 'LU'];
 
 /**
  * App Provider.
