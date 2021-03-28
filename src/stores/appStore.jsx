@@ -22,8 +22,9 @@ export const AppProvider = ({ children }) => {
   const [selectedOptions, setSelectedOptions] = useState(BASE_OPTIONS);
 
   const randomizeOptions = useCallback(() => {
-    const optionsToUse = BASE_OPTIONS.filter((value, index) => selectedOptions[index])
-    setRandomOptions(R.sort(() => 0.5 - Math.random(), optionsToUse))
+    const optionsToUse = BASE_OPTIONS.filter((value, index) => selectedOptions[index]);
+    setRandomOptions(R.sort(() => 0.5 - Math.random(), optionsToUse));
+    setSelected(0);
   }, [selectedOptions]);
 
   useEffect(() => {
