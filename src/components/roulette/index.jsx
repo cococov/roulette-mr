@@ -47,43 +47,4 @@ const Roulette = () => {
   );
 };
 
-/**
- * Ruleta para seleccionar Robin.
- */
-export const RobinRoulette = () => {
-  const { selectedRobin, running, randomRobinOptions, isRobinChecked, setSelectedRobin } = useContext(AppContext);
-  const runningRef = useRef(false);
-  const intervalRef = useRef(null);
-
-  useEffect(() => {
-    if (running && !runningRef.current) {
-      runningRef.current = true;
-
-      intervalRef.current = setInterval(() => {
-        setSelectedRobin((prev) => getNext(prev, randomRobinOptions.length));
-      }, 200);
-
-    } else if (!running) {
-      runningRef.current = false;
-      clearInterval(intervalRef.current);
-    }
-  }, [running, setSelectedRobin, randomRobinOptions.length])
-
-  const prev = (selected, length) => randomRobinOptions[getPrev(selected, length)];
-  const main = (selected) => randomRobinOptions[selected];
-  const next = (selected, length) => randomRobinOptions[getNext(selected, length)];
-
-  return (
-    <>
-      {isRobinChecked ? (
-          <StyledContainer robin>
-            <Secondary value={prev(selectedRobin, randomRobinOptions.length)} robin />
-            <Main value={main(selectedRobin)} robin />
-            <Secondary value={next(selectedRobin, randomRobinOptions.length)} robin />
-          </StyledContainer>) : <></>
-      }
-    </>
-  );
-};
-
 export default Roulette;

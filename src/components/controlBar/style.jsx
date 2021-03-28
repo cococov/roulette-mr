@@ -28,9 +28,3 @@ export const ButtonContainer = styled.span`
   flex-direction: row;
   margin-bottom: 1rem;
 `;
-
-export const RobinCheckContainer = styled.span`
-  & {
-    margin-left: 1rem;
-  }
-`;

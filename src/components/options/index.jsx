@@ -33,38 +33,4 @@ const Options = () => {
   );
 };
 
-export const RobinOptions = () => {
-  const { running, BASE_ROBIN_OPTIONS, isRobinChecked, selectedRobinOptions, setSelectedRobinOptions } = useContext(AppContext);
-
-  const handleCheck = index => {
-    setSelectedRobinOptions((prev) => (
-      prev.map((value, i) => i === index ? !value : value)
-    ));
-  };
-
-  return (
-    <>
-      {isRobinChecked ? (
-        <StyledContainer>
-          {BASE_ROBIN_OPTIONS.map(
-            (option, index) => (
-              <Option
-                key={option}
-                name={option}
-                index={index}
-                running={running}
-                color={running ? 'default' : 'secondary'}
-                size={2}
-                selected={!!selectedRobinOptions[index]}
-                handleCheck={handleCheck}
-              >
-                {option}
-              </Option>
-            ))}
-        </StyledContainer>) : <></>
-      }
-    </>
-  );
-};
-
 export default Options;

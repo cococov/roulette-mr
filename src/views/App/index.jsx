@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { AppProvider } from '../../stores';
-import { Roulette, RobinRoulette, ControlBar, Options, RobinOptions } from '../../components';
+import { Roulette, ControlBar, Options } from '../../components';
 import { theme } from '../../styles';
 import {
   MainContainer,
@@ -21,12 +21,10 @@ const App = () => {
               <ControlBar />
               <WheelsContainer>
                 <Roulette />
-                <RobinRoulette />
               </WheelsContainer>
             </RouletteContainer>
             <OptionsContainer>
               <Options />
-              <RobinOptions />
             </OptionsContainer>
           </MainContainer>
         </MuiThemeProvider>
