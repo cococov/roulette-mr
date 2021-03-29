@@ -4,7 +4,7 @@ import Option from '../checkbox';
 import { StyledContainer } from './style';
 
 const Options = () => {
-  const { running, BASE_OPTIONS, selectedOptions, setSelectedOptions } = useContext(AppContext);
+  const { running, baseOptions, selectedOptions, setSelectedOptions } = useContext(AppContext);
 
   const handleCheck = index => {
     setSelectedOptions((prev) => (
@@ -14,21 +14,24 @@ const Options = () => {
 
   return (
     <StyledContainer>
-      {BASE_OPTIONS.map(
-        (option, index) => (
-          <Option
-            key={option}
-            name={option}
-            index={index}
-            running={running}
-            color={running ? 'default' : 'primary'}
-            size={2}
-            selected={!!selectedOptions[index]}
-            handleCheck={handleCheck}
-          >
-            {option}
-          </Option>
-        ))}
+      {baseOptions.length > 0 ?
+        baseOptions.map(
+          (option, index) => (
+            <Option
+              key={option}
+              name={option}
+              index={index}
+              running={running}
+              color={running ? 'default' : 'primary'}
+              size={2}
+              selected={!!selectedOptions[index]}
+              handleCheck={handleCheck}
+            >
+              {option}
+            </Option>
+          )) : (
+          <h1>No Data</h1>
+        )}
     </StyledContainer>
   );
 };

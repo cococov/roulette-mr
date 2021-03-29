@@ -1,13 +1,14 @@
-import React, { createContext, useEffect, useState, useCallback } from 'react';
+import React, { createContext, useEffect, useState, useCallback, useLayoutEffect } from 'react';
+import { Loading } from '../components';
 import PropTypes from 'prop-types';
+import firebase from '@firebase/app';
+import '@firebase/database';
 import * as R from 'ramda'
 
 /**
  * App Context.
  */
 const AppContext = createContext();
-
-const BASE_OPTIONS = ['Mera', 'Giovanni', 'JP', 'Juan K', 'Jesús', 'Edgar', 'LU', 'Paloma'];
 
 /**
  * App Provider.
@@ -16,16 +17,28 @@ const BASE_OPTIONS = ['Mera', 'Giovanni', 'JP', 'Juan K', 'Jesús', 'Edgar', 'LU
  */
 export const AppProvider = ({ children }) => {
   const [running, setRunning] = useState(false);
+  const [baseOptions, setBaseOptions] = useState([]);
+  const [isFetchDone, setFetchDone] = useState(false);
 
   const [selected, setSelected] = useState(0);
   const [randomOptions, setRandomOptions] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState(BASE_OPTIONS);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  useLayoutEffect(() => {
+    let ref = firebase.database().ref(`baseOptions`);
+    ref.on('value', snapshot => {
+      const result = snapshot.val();
+      result && setBaseOptions(result);
+      result && setSelectedOptions(result);
+      setFetchDone(true);
+    });
+  }, []);
 
   const randomizeOptions = useCallback(() => {
-    const optionsToUse = BASE_OPTIONS.filter((value, index) => selectedOptions[index]);
+    const optionsToUse = baseOptions.filter((value, index) => selectedOptions[index]);
     setRandomOptions(R.sort(() => 0.5 - Math.random(), optionsToUse));
     setSelected(0);
-  }, [selectedOptions]);
+  }, [selectedOptions, baseOptions]);
 
   useEffect(() => {
     randomizeOptions();
@@ -44,7 +57,7 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        BASE_OPTIONS,
+        baseOptions,
         selected,
         running,
         randomOptions,
@@ -54,7 +67,7 @@ export const AppProvider = ({ children }) => {
         setSelectedOptions,
       }}
     >
-      {children}
+      {isFetchDone ? children : (<Loading />)}
     </AppContext.Provider>
   );
 };
