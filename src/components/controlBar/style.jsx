@@ -25,6 +25,15 @@ export const StyledTextField = styled(TextField)`
 
 export const ButtonContainer = styled.span`
   display: flex;
-  flex-direction: row;
   margin-bottom: 1rem;
+  width: 100%;
+`;
+
+export const ClipBoardButtonWrapper = styled.span`
+`;
+
+export const ButtonWrapper = styled.span`
+    flex: 1;
+    text-align: center;
+    margin-left: 3rem;
 `;

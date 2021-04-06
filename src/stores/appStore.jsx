@@ -17,6 +17,7 @@ const AppContext = createContext();
  */
 export const AppProvider = ({ children }) => {
   const [running, setRunning] = useState(false);
+  const [done, setDone] = useState(false);
   const [baseOptions, setBaseOptions] = useState([]);
   const [isFetchDone, setFetchDone] = useState(false);
 
@@ -57,13 +58,15 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        baseOptions,
-        selected,
+        done,
         running,
+        selected,
+        baseOptions,
         randomOptions,
         selectedOptions,
-        setSelected,
+        setDone,
         setRunning,
+        setSelected,
         setSelectedOptions,
       }}
     >

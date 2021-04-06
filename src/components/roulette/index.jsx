@@ -15,7 +15,7 @@ const random = (min, max) => Math.floor((Math.random() * (max - min + 1)) + min)
  * Ruleta para seleccionar Batman.
  */
 const Roulette = () => {
-  const { selected, running, randomOptions, setSelected, setRunning } = useContext(AppContext);
+  const { selected, running, randomOptions, setDone, setSelected, setRunning } = useContext(AppContext);
   const runningRef = useRef(false);
   const intervalRef = useRef(null);
 
@@ -27,12 +27,12 @@ const Roulette = () => {
         setSelected((prev) => getNext(prev, randomOptions.length));
       }, 200);
 
-      setTimeout(() => { setRunning(false) }, random(3 * 1000, 6 * 1000));
+      setTimeout(() => { setRunning(false); setDone(true) }, random(3 * 1000, 6 * 1000));
     } else if (!running) {
       runningRef.current = false;
       clearInterval(intervalRef.current);
     }
-  }, [running, setSelected, setRunning, randomOptions.length])
+  }, [running, setSelected, setRunning, setDone, randomOptions.length])
 
   const prev = (selected, length) => randomOptions[getPrev(selected, length)];
   const main = (selected) => randomOptions[selected];

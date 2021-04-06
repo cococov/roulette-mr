@@ -29,7 +29,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <MuiThemeProvider theme={theme}>
         <AppProvider>
-          <MainContainer>
+          <MainContainer id="screenshot-ref">
             <RouletteContainer>
               <ControlBar />
               <WheelsContainer>

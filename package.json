@@ -6,9 +6,12 @@
     "@firebase/app": "^0.6.17",
     "@firebase/database": "^0.9.6",
     "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.3",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^13.0.16",
+    "copy-image-clipboard": "^1.0.1",
+    "dom-to-image": "^2.6.0",
     "prop-types": "^15.7.2",
     "ramda": "^0.27.1",
     "react": "^17.0.2",
@@ -52,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/helper-builder-react-jsx": "^7.12.13"
   }
 }
