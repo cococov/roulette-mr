@@ -4,11 +4,24 @@ import Option from '../checkbox';
 import { StyledContainer } from './style';
 
 const Options = () => {
-  const { running, baseOptions, selectedOptions, setSelectedOptions } = useContext(AppContext);
+  const {
+    running,
+    baseOptions,
+    batman,
+    robin,
+    selectedOptions,
+    setSelectedOptions,
+    handleChangeRobin,
+    handleChangeBatman
+  } = useContext(AppContext);
 
   const handleCheck = index => {
     setSelectedOptions((prev) => (
-      prev.map((value, i) => i === index ? !value : value)
+      prev.map((value, i) => {
+        if (batman === baseOptions[i] || robin === baseOptions[i])
+          return false;
+        return (i === index) ? !value : value;
+      })
     ));
   };
 
@@ -25,7 +38,11 @@ const Options = () => {
               color={running ? 'default' : 'primary'}
               size={2}
               selected={!!selectedOptions[index]}
+              isRobin={robin === option}
+              isBatman={batman === option}
               handleCheck={handleCheck}
+              handleChangeRobin={handleChangeRobin}
+              handleChangeBatman={handleChangeBatman}
             >
               {option}
             </Option>
