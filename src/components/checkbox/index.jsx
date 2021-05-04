@@ -40,7 +40,7 @@ const Options = ({
         color={(isBatman || isRobin) ? 'default' : color}
         onChange={() => { handleCheck(index) }}
       />
-      <StyledName size={size} >{`${burden.length} - ${name}`}</StyledName>
+      <StyledName size={size} >{`${burden ? burden.length : 0} - ${name}`}</StyledName>
     </StyledContainer>
   );
 };
