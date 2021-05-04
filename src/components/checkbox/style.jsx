@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledContainer = styled.span`
   display: flex;
   flex-direction: row;
-  max-width: fit-content;
+  max-width: max-content;
   align-items: center;
   justify-content: center;
 `

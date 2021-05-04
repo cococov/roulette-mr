@@ -20,6 +20,8 @@ export const AppProvider = ({ children }) => {
   const [running, setRunning] = useState(false);
   const [done, setDone] = useState(false);
   const [baseOptions, setBaseOptions] = useState([]);
+  const [baseOptionsId, setBaseOptionsId] = useState([]);
+  const [baseOptionsBurden, setBaseOptionsBurden] = useState([]);
   const [isFetchDone, setFetchDone] = useState(false);
 
   const [selected, setSelected] = useState(0);
@@ -28,6 +30,24 @@ export const AppProvider = ({ children }) => {
 
   const [batman, setBatman] = useState('');
   const [robin, setRobin] = useState('');
+
+  /* Load resources */
+  const getBurden = useCallback(async () => {
+    const URL = 'https://gitlab.com/api/v4/projects/3310437/merge_requests?state=opened'
+    const apiKey = process.env.REACT_APP_GITLAB_API_KEY
+    let result = [];
+
+    await Promise.all(baseOptionsId.map(async (option, index) => {
+      let rawResponse = await fetch(
+        `${URL}&assignee_id=${option}&not[author_username]=bukhr-tech`,
+        { method: 'GET', headers: { 'Authorization': `Bearer ${apiKey}` } }
+      );
+      let response = await rawResponse.json();
+      result[index] = response;
+    }));
+
+    setBaseOptionsBurden(result);
+  }, [baseOptionsId]);
 
   useLayoutEffect(() => {
     let ref = firebase.database().ref(`baseOptions`);
@@ -38,15 +58,22 @@ export const AppProvider = ({ children }) => {
       setHowManyAreDone(prev => prev + 1);
     });
 
-    let ref2 = firebase.database().ref(`batman`);
+    let ref2 = firebase.database().ref(`baseOptionsId`);
     ref2.on('value', snapshot => {
+      const result = snapshot.val();
+      result && setBaseOptionsId(result);
+      setHowManyAreDone(prev => prev + 1);
+    });
+
+    let ref3 = firebase.database().ref(`batman`);
+    ref3.on('value', snapshot => {
       const result = snapshot.val();
       setBatman(result);
       setHowManyAreDone(prev => prev + 1);
     });
 
-    let ref3 = firebase.database().ref(`robin`);
-    ref3.on('value', snapshot => {
+    let ref4 = firebase.database().ref(`robin`);
+    ref4.on('value', snapshot => {
       const result = snapshot.val();
       setRobin(result);
       setHowManyAreDone(prev => prev + 1);
@@ -54,9 +81,16 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if(howManyAreDone === 3) setFetchDone(true);
-  }, [howManyAreDone]);
+    const finishLoad = async () => {
+      if (howManyAreDone === 4) {
+        await getBurden();
+        setFetchDone(true);
+      }
+    }
+    finishLoad();
+  }, [howManyAreDone, getBurden]);
 
+  /* Randomize options */
   const randomizeOptions = useCallback(() => {
     const optionsToUse = baseOptions.filter((value, index) => selectedOptions[index]);
     setRandomOptions(R.sort(() => 0.5 - Math.random(), optionsToUse));
@@ -72,10 +106,14 @@ export const AppProvider = ({ children }) => {
   }, [randomizeOptions, selectedOptions])
 
   useEffect(() => {
-    if (running)
+    if (running) {
       randomizeOptions();
-  }, [randomizeOptions, running])
+    } else {
+      getBurden();
+    }
+  }, [randomizeOptions, getBurden, running])
 
+  /* Handle Batman and Robin selection */
   useEffect(() => {
     setSelectedOptions((prev) => prev.map((value, i) => batman === baseOptions[i] ? false : value));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -110,6 +148,7 @@ export const AppProvider = ({ children }) => {
         baseOptions,
         randomOptions,
         selectedOptions,
+        baseOptionsBurden,
         setDone,
         setRunning,
         setSelected,

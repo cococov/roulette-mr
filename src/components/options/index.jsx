@@ -9,6 +9,7 @@ const Options = () => {
     baseOptions,
     batman,
     robin,
+    baseOptionsBurden,
     selectedOptions,
     setSelectedOptions,
     handleChangeRobin,
@@ -38,6 +39,7 @@ const Options = () => {
               color={running ? 'default' : 'primary'}
               size={2}
               selected={!!selectedOptions[index]}
+              burden={baseOptionsBurden[index]}
               isRobin={robin === option}
               isBatman={batman === option}
               handleCheck={handleCheck}
