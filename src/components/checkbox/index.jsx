@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checkbox } from '@material-ui/core';
-import { StyledContainer, StyledName } from './style';
+import { StyledContainer, StyledName, StyledBurden, StyledNameContainer } from './style';
 
 const Options = ({
   name,
@@ -40,7 +40,10 @@ const Options = ({
         color={(isBatman || isRobin) ? 'default' : color}
         onChange={() => { handleCheck(index) }}
       />
-      <StyledName size={size} >{`${burden ? burden.length : 0} - ${name}`}</StyledName>
+      <StyledNameContainer>
+        <StyledName size={size} >{`${name}`}</StyledName>
+        <StyledBurden size={size} >{`${burden ? burden.length : 0}`}</StyledBurden>
+      </StyledNameContainer>
     </StyledContainer>
   );
 };
